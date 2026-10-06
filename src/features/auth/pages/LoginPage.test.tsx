@@ -70,7 +70,7 @@ describe("LoginPage", () => {
   it("menampilkan status memproses", async () => {
     mock(authApi.login).mockReturnValue(new Promise(() => {}));
     await fillAndSubmit();
-    expect(await screen.findByRole("button", { name: "Memprosesâ€¦" })).toBeDisabled();
+    expect(await screen.findByRole("button", { name: "Memproses..." })).toBeDisabled();
   });
 
   it("menyediakan tautan ke halaman daftar", () => {
