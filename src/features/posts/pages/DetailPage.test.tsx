@@ -28,7 +28,7 @@ beforeEach(() => {
 async function load(profileId = 7, post: unknown = samplePost) {
   mock(postApi.getPost).mockResolvedValue(ok({ post }));
   const user = userEvent.setup();
-  const view = renderWithStore(<DetailPage />, withProfile(profileId));   
+  const view = renderWithStore(<DetailPage />, withProfile(profileId));
   await screen.findByText("Halo kampus");
   return { user, ...view };
 }
@@ -39,7 +39,7 @@ describe("DetailPage: keadaan awal", () => {
   it("menampilkan status memuat", async () => {
     mock(postApi.getPost).mockReturnValue(new Promise(() => {}));
     renderWithStore(<DetailPage />);
-    expect(await screen.findByText("Memuat postinganâ€¦")).toBeInTheDocument();
+    expect(await screen.findByText(/Memuat postingan/)).toBeInTheDocument();
   });
 
   it("menampilkan pesan bila postingan tidak ditemukan", async () => {
