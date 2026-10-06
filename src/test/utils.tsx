@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { render } from "@testing-library/react";
 import type { ReactElement } from "react";
 import { Provider } from "react-redux";
@@ -44,10 +44,14 @@ export function withProfile(id = 7) {
   return { users: { ...initialUsers, profile: { ...me, id } } };
 }
 
+const rootReducer = combineReducers({ auth: authReducer, users: usersReducer, posts: postsReducer });
+
+type TestState = ReturnType<typeof rootReducer>;
+
 export function makeStore(preloaded: Record<string, unknown> = {}) {
   return configureStore({
-    reducer: { auth: authReducer, users: usersReducer, posts: postsReducer },
-    preloadedState: preloaded as never,
+    reducer: rootReducer,
+    preloadedState: preloaded as Partial<TestState>,
   });
 }
 

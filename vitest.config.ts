@@ -1,9 +1,11 @@
 import react from "@vitejs/plugin-react";
 import { fileURLToPath } from "node:url";
-import { defineConfig } from "vitest/config";
+import { defineConfig, type UserConfig } from "vitest/config";
 
 export default defineConfig({
-  plugins: [react()],
+  // @vitejs/plugin-react is typed against the top-level Vite, while vitest ships
+  // its own copy; cast so the two Plugin types don't clash during type checking.
+  plugins: [react()] as UserConfig["plugins"],
   resolve: {
     alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
   },
